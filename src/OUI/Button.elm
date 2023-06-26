@@ -5,6 +5,7 @@ module OUI.Button exposing
     , onClick, link, disabled
     , elevatedButton, filledButton, tonalButton, outlinedButton, textButton, smallFAB, mediumFAB, largeFAB, extendedFAB, iconButton, filledIconButton, outlinedIconButton
     , properties
+    , MenuButton, menuButtonProperties, withMenu
     )
 
 {-| A button creation API
@@ -43,6 +44,7 @@ following functions.
 
 import OUI exposing (Color(..))
 import OUI.Icon exposing (Icon)
+import OUI.Menu exposing (Menu)
 
 
 {-| A button type
@@ -85,6 +87,10 @@ type alias Props msg =
 -}
 type Button constraints msg
     = Button (Props msg)
+
+
+type MenuButton constraints item msg
+    = MenuButton (Props msg) (Menu constraints item msg)
 
 
 {-| Create a button with the given label
@@ -233,6 +239,7 @@ disabled (Button props) =
     Button props
 
 
+<<<<<<< HEAD
 {-| Set the button as a link to the given URL
 -}
 link : String -> Button { props | needOnClickOrDisabled : () } msg -> Button { a | hasAction : () } msg
@@ -241,6 +248,14 @@ link url (Button props) =
         { props
             | action = Link url
         }
+=======
+withMenu :
+    Menu { c | hasSelect : () } item msg
+    -> Button { props | needOnClickOrDisabled : () } msg
+    -> MenuButton { a | hasSelect : () } item msg
+withMenu menu (Button props) =
+    MenuButton props menu
+>>>>>>> 82bc277 (wip)
 
 
 {-| -}
@@ -255,3 +270,22 @@ properties :
         }
 properties (Button props) =
     props
+
+
+{-| -}
+menuButtonProperties :
+    MenuButton constraints item msg
+    ->
+        { button :
+            { text : String
+            , icon : Maybe Icon
+            , onClick : Maybe msg
+            , color : Color
+            , type_ : Type
+            }
+        , menu : Menu constraints item msg
+        }
+menuButtonProperties (MenuButton props menu) =
+    { button = props
+    , menu = menu
+    }

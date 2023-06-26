@@ -10,6 +10,7 @@ import OUI.Explorer as Explorer exposing (Explorer)
 import OUI.Showcase.Buttons as Buttons
 import OUI.Showcase.Checkbox as Checkbox
 import OUI.Showcase.Colors as Colors
+import OUI.Showcase.Dropdown as Dropdown
 import OUI.Showcase.Switches as Switches
 import OUI.Showcase.TextFields as TextFields
 import OUI.Showcase.Typography as Typography
@@ -82,3 +83,4 @@ addPages =
         >> Explorer.addBook Checkbox.book
         >> Explorer.addBook Switches.book
         >> Explorer.addBook TextFields.book
+        >> Explorer.addBook Dropdown.book

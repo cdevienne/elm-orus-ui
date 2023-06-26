@@ -68,7 +68,7 @@ withTrailingIcon itemToIcon (Menu props) =
 
 withSingleSelect :
     (item -> msg)
-    -> Maybe Item
+    -> Maybe item
     -> Menu { noSelect : () } item msg
     -> Menu { hasSelect : (), singleSelect : () } item msg
 withSingleSelect onSelect selected (Menu props) =
@@ -80,7 +80,7 @@ withSingleSelect onSelect selected (Menu props) =
 
 withMultiSelect :
     (List item -> msg)
-    -> List Item
+    -> List item
     -> Menu { noSelect : () } item msg
     -> Menu { hasSelect : (), multiSelect : () } item msg
 withMultiSelect onSelect selected (Menu props) =
