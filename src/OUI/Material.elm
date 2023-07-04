@@ -1,4 +1,7 @@
-module OUI.Material exposing (text, button, checkbox, icon, switch, textField)
+module OUI.Material exposing
+    ( text, button, checkbox, icon, switch, textField
+    , divider
+    )
 
 {-| A elm-ui based renderer API
 
@@ -10,9 +13,11 @@ import Color
 import Element exposing (Attribute, Element)
 import OUI.Button
 import OUI.Checkbox
+import OUI.Divider
 import OUI.Icon exposing (Icon)
 import OUI.Material.Button
 import OUI.Material.Checkbox
+import OUI.Material.Divider
 import OUI.Material.Icon
 import OUI.Material.Switch
 import OUI.Material.TextField
@@ -75,3 +80,10 @@ switch theme =
 textField : Theme -> List (Attribute msg) -> OUI.TextField.TextField msg -> Element msg
 textField theme =
     OUI.Material.TextField.render theme.typescale theme.colorscheme theme.button theme.textfield
+
+
+{-| Render a divider
+-}
+divider : Theme -> List (Attribute msg) -> OUI.Divider.Divider -> Element msg
+divider theme =
+    OUI.Material.Divider.render theme.colorscheme theme.divider
