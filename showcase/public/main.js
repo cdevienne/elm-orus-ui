@@ -12922,11 +12922,18 @@ var $author$project$OUI$Utils$ARIA$toElementAttributes = function (_v0) {
 							$author$project$OUI$Utils$ARIA$roleAttr('checkbox'),
 							$author$project$OUI$Utils$ARIA$checkedAttr(checked)
 						]);
+				case 'RoleRadioButton':
+					var checked = role.a;
+					return _List_fromArray(
+						[
+							$author$project$OUI$Utils$ARIA$roleAttr('radio'),
+							$author$project$OUI$Utils$ARIA$checkedAttr(checked)
+						]);
 				case 'RoleSwitch':
 					var state = role.a;
 					return _List_fromArray(
 						[
-							$author$project$OUI$Utils$ARIA$roleAttr('checkbox'),
+							$author$project$OUI$Utils$ARIA$roleAttr('switch'),
 							$author$project$OUI$Utils$ARIA$checkedAttr(state)
 						]);
 				case 'RoleImage':
@@ -13674,10 +13681,29 @@ var $author$project$OUI$Material$Checkbox$render = F4(
 		var aria = $author$project$OUI$Utils$ARIA$toElementAttributes(
 			$author$project$OUI$Utils$ARIA$roleCheckbox(properties.checked));
 		var _v0 = function () {
-			var _v1 = _Utils_Tuple2(properties.onChange, properties.color);
-			if (_v1.a.$ === 'Just') {
-				if (_v1.b.$ === 'Error') {
-					var _v2 = _v1.b;
+			var _v1 = _Utils_Tuple2(properties.onChange, properties.checked);
+			if (_v1.a.$ === 'Nothing') {
+				var _v2 = _v1.a;
+				return _Utils_Tuple2(colorscheme.onSurface, colorscheme.onSurface);
+			} else {
+				if (_v1.b) {
+					return _Utils_Tuple2(
+						A2($author$project$OUI$Material$Color$getColor, properties.color, colorscheme),
+						colorscheme.onSurface);
+				} else {
+					return _Utils_Tuple2(
+						colorscheme.onSurface,
+						A2($author$project$OUI$Material$Color$getColor, properties.color, colorscheme));
+				}
+			}
+		}();
+		var focusedAndHoveredColor = _v0.a;
+		var pressedColor = _v0.b;
+		var _v3 = function () {
+			var _v4 = _Utils_Tuple2(properties.onChange, properties.color);
+			if (_v4.a.$ === 'Just') {
+				if (_v4.b.$ === 'Error') {
+					var _v5 = _v4.b;
 					return _Utils_Tuple3(
 						A2($author$project$OUI$Material$Color$getOnColor, properties.color, colorscheme),
 						A2($author$project$OUI$Material$Color$getColor, properties.color, colorscheme),
@@ -13689,49 +13715,51 @@ var $author$project$OUI$Material$Checkbox$render = F4(
 						colorscheme.onSurface);
 				}
 			} else {
-				var _v3 = _v1.a;
+				var _v6 = _v4.a;
 				return _Utils_Tuple3(
 					colorscheme.surface,
 					A2($author$project$OUI$Material$Color$setAlpha, 0.38, colorscheme.onSurface),
 					A2($author$project$OUI$Material$Color$setAlpha, 0.38, colorscheme.onSurface));
 			}
 		}();
-		var frontColor = _v0.a;
-		var backColor = _v0.b;
-		var borderColor = _v0.c;
+		var frontColor = _v3.a;
+		var backColor = _v3.b;
+		var borderColor = _v3.c;
 		return A2(
 			$mdgriffith$elm_ui$Element$Input$button,
 			_Utils_ap(
 				aria,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$width(
-						$mdgriffith$elm_ui$Element$px(theme.stateLayerSize)),
-						$mdgriffith$elm_ui$Element$height(
-						$mdgriffith$elm_ui$Element$px(theme.stateLayerSize)),
-						$mdgriffith$elm_ui$Element$Border$rounded((theme.stateLayerSize / 2) | 0),
-						$mdgriffith$elm_ui$Element$focused(
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$Background$color(
-								$author$project$OUI$Material$Color$toElementColor(
-									A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$focusStateLayerOpacity, colorscheme.onSurface)))
-							])),
-						$mdgriffith$elm_ui$Element$mouseDown(
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$Background$color(
-								$author$project$OUI$Material$Color$toElementColor(
-									A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$pressStateLayerOpacity, colorscheme.onSurface)))
-							])),
-						$mdgriffith$elm_ui$Element$mouseOver(
-						_List_fromArray(
-							[
-								$mdgriffith$elm_ui$Element$Background$color(
-								$author$project$OUI$Material$Color$toElementColor(
-									A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$hoverStateLayerOpacity, colorscheme.onSurface)))
-							]))
-					])),
+				_Utils_ap(
+					attrs,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width(
+							$mdgriffith$elm_ui$Element$px(theme.stateLayerSize)),
+							$mdgriffith$elm_ui$Element$height(
+							$mdgriffith$elm_ui$Element$px(theme.stateLayerSize)),
+							$mdgriffith$elm_ui$Element$Border$rounded((theme.stateLayerSize / 2) | 0),
+							$mdgriffith$elm_ui$Element$focused(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color(
+									$author$project$OUI$Material$Color$toElementColor(
+										A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$focusStateLayerOpacity, focusedAndHoveredColor)))
+								])),
+							$mdgriffith$elm_ui$Element$mouseDown(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color(
+									$author$project$OUI$Material$Color$toElementColor(
+										A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$pressStateLayerOpacity, pressedColor)))
+								])),
+							$mdgriffith$elm_ui$Element$mouseOver(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color(
+									$author$project$OUI$Material$Color$toElementColor(
+										A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$hoverStateLayerOpacity, focusedAndHoveredColor)))
+								]))
+						]))),
 			{
 				label: A2(
 					$mdgriffith$elm_ui$Element$el,
@@ -23868,6 +23896,287 @@ var $author$project$OUI$Showcase$Dividers$book = A2(
 	$author$project$OUI$Explorer$withStaticChapter,
 	$author$project$OUI$Showcase$Dividers$commonDividers,
 	$author$project$OUI$Explorer$book('Dividers'));
+var $author$project$OUI$RadioButton$RadioButton = function (a) {
+	return {$: 'RadioButton', a: a};
+};
+var $author$project$OUI$RadioButton$disabled = function (_v0) {
+	var props = _v0.a;
+	return $author$project$OUI$RadioButton$RadioButton(props);
+};
+var $author$project$OUI$RadioButton$new = $author$project$OUI$RadioButton$RadioButton(
+	{color: $author$project$OUI$Primary, onChange: $elm$core$Maybe$Nothing, selected: false});
+var $author$project$OUI$RadioButton$onChange = F2(
+	function (msg, _v0) {
+		var props = _v0.a;
+		return $author$project$OUI$RadioButton$RadioButton(
+			_Utils_update(
+				props,
+				{
+					onChange: $elm$core$Maybe$Just(msg)
+				}));
+	});
+var $author$project$OUI$Showcase$RadioButtons$onChange = F2(
+	function (name, selected) {
+		return $author$project$OUI$Explorer$logEvent(
+			name + (' changes to ' + (selected ? '\'selected\'' : '\'unselected\'')));
+	});
+var $author$project$OUI$RadioButton$properties = function (_v0) {
+	var props = _v0.a;
+	return props;
+};
+var $author$project$OUI$Utils$ARIA$RoleRadioButton = function (a) {
+	return {$: 'RoleRadioButton', a: a};
+};
+var $author$project$OUI$Utils$ARIA$roleRadioButton = function (checked) {
+	return $author$project$OUI$Utils$ARIA$fromRole(
+		$author$project$OUI$Utils$ARIA$RoleRadioButton(checked));
+};
+var $author$project$OUI$Material$RadioButton$render = F4(
+	function (colorscheme, theme, attrs, radiobutton) {
+		var properties = $author$project$OUI$RadioButton$properties(radiobutton);
+		var isError = _Utils_eq(properties.color, $author$project$OUI$Error);
+		var isDisabled = _Utils_eq(properties.onChange, $elm$core$Maybe$Nothing);
+		var mainColor = function () {
+			var _v2 = _Utils_Tuple2(isDisabled, isError);
+			if (!_v2.a) {
+				if (_v2.b) {
+					return A2($author$project$OUI$Material$Color$getColor, properties.color, colorscheme);
+				} else {
+					return A2($author$project$OUI$Material$Color$getColor, properties.color, colorscheme);
+				}
+			} else {
+				return A2($author$project$OUI$Material$Color$setAlpha, 0.38, colorscheme.onSurface);
+			}
+		}();
+		var aria = $author$project$OUI$Utils$ARIA$toElementAttributes(
+			$author$project$OUI$Utils$ARIA$roleRadioButton(properties.selected));
+		var _v0 = function () {
+			var _v1 = _Utils_Tuple2(isDisabled, properties.selected);
+			if (_v1.a) {
+				return _Utils_Tuple2(colorscheme.onSurface, colorscheme.onSurface);
+			} else {
+				if (_v1.b) {
+					return _Utils_Tuple2(
+						A2($author$project$OUI$Material$Color$getColor, properties.color, colorscheme),
+						colorscheme.onSurface);
+				} else {
+					return _Utils_Tuple2(
+						colorscheme.onSurface,
+						A2($author$project$OUI$Material$Color$getColor, properties.color, colorscheme));
+				}
+			}
+		}();
+		var focusedAndHoveredColor = _v0.a;
+		var pressedColor = _v0.b;
+		return A2(
+			$mdgriffith$elm_ui$Element$Input$button,
+			_Utils_ap(
+				aria,
+				_Utils_ap(
+					attrs,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width(
+							$mdgriffith$elm_ui$Element$px(theme.stateLayerSize)),
+							$mdgriffith$elm_ui$Element$height(
+							$mdgriffith$elm_ui$Element$px(theme.stateLayerSize)),
+							$mdgriffith$elm_ui$Element$Border$rounded((theme.stateLayerSize / 2) | 0),
+							$mdgriffith$elm_ui$Element$focused(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color(
+									$author$project$OUI$Material$Color$toElementColor(
+										A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$focusStateLayerOpacity, focusedAndHoveredColor)))
+								])),
+							$mdgriffith$elm_ui$Element$mouseOver(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color(
+									$author$project$OUI$Material$Color$toElementColor(
+										A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$hoverStateLayerOpacity, focusedAndHoveredColor)))
+								])),
+							$mdgriffith$elm_ui$Element$mouseDown(
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$Background$color(
+									$author$project$OUI$Material$Color$toElementColor(
+										A2($author$project$OUI$Material$Color$setAlpha, $author$project$OUI$Material$Color$pressStateLayerOpacity, pressedColor)))
+								]))
+						]))),
+			{
+				label: A2(
+					$mdgriffith$elm_ui$Element$el,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width(
+							$mdgriffith$elm_ui$Element$px(theme.containerWidth)),
+							$mdgriffith$elm_ui$Element$height(
+							$mdgriffith$elm_ui$Element$px(theme.containerHeight)),
+							$mdgriffith$elm_ui$Element$centerX,
+							$mdgriffith$elm_ui$Element$centerY
+						]),
+					properties.selected ? A2(
+						$mdgriffith$elm_ui$Element$el,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$width(
+								$mdgriffith$elm_ui$Element$px(theme.containerWidth)),
+								$mdgriffith$elm_ui$Element$height(
+								$mdgriffith$elm_ui$Element$px(theme.containerHeight)),
+								$mdgriffith$elm_ui$Element$Border$width(theme.borderWidth),
+								$mdgriffith$elm_ui$Element$Border$rounded(theme.containerShape),
+								$mdgriffith$elm_ui$Element$Border$color(
+								$author$project$OUI$Material$Color$toElementColor(mainColor))
+							]),
+						A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$width(
+									$mdgriffith$elm_ui$Element$px(theme.contentSize)),
+									$mdgriffith$elm_ui$Element$height(
+									$mdgriffith$elm_ui$Element$px(theme.contentSize)),
+									$mdgriffith$elm_ui$Element$Background$color(
+									$author$project$OUI$Material$Color$toElementColor(mainColor)),
+									$mdgriffith$elm_ui$Element$Border$color(
+									$author$project$OUI$Material$Color$toElementColor(mainColor)),
+									$mdgriffith$elm_ui$Element$Border$rounded(theme.containerShape),
+									$mdgriffith$elm_ui$Element$centerX,
+									$mdgriffith$elm_ui$Element$centerY
+								]),
+							$mdgriffith$elm_ui$Element$none)) : A2(
+						$mdgriffith$elm_ui$Element$el,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$width(
+								$mdgriffith$elm_ui$Element$px(theme.containerWidth)),
+								$mdgriffith$elm_ui$Element$height(
+								$mdgriffith$elm_ui$Element$px(theme.containerHeight)),
+								$mdgriffith$elm_ui$Element$Border$width(theme.borderWidth),
+								$mdgriffith$elm_ui$Element$Border$rounded(theme.containerShape),
+								$mdgriffith$elm_ui$Element$Border$color(
+								$author$project$OUI$Material$Color$toElementColor(mainColor))
+							]),
+						$mdgriffith$elm_ui$Element$none)),
+				onPress: A2(
+					$elm$core$Maybe$map,
+					function (msg) {
+						return msg(!properties.selected);
+					},
+					properties.onChange)
+			});
+	});
+var $author$project$OUI$Material$radiobutton = function (theme) {
+	return A2($author$project$OUI$Material$RadioButton$render, theme.colorscheme, theme.radiobutton);
+};
+var $author$project$OUI$RadioButton$withColor = F2(
+	function (color, _v0) {
+		var props = _v0.a;
+		return $author$project$OUI$RadioButton$RadioButton(
+			_Utils_update(
+				props,
+				{color: color}));
+	});
+var $author$project$OUI$RadioButton$withSelected = F2(
+	function (selected, _v0) {
+		var props = _v0.a;
+		return $author$project$OUI$RadioButton$RadioButton(
+			_Utils_update(
+				props,
+				{selected: selected}));
+	});
+var $author$project$OUI$Showcase$RadioButtons$radiobutton = function (_v0) {
+	var theme = _v0.theme;
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$spacing(30)
+			]),
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$text('RadioButton'),
+				A2(
+				$mdgriffith$elm_ui$Element$row,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$spacing(30)
+					]),
+				_List_fromArray(
+					[
+						A3(
+						$author$project$OUI$Material$radiobutton,
+						theme,
+						_List_Nil,
+						A2(
+							$author$project$OUI$RadioButton$withSelected,
+							false,
+							A2(
+								$author$project$OUI$RadioButton$onChange,
+								$author$project$OUI$Showcase$RadioButtons$onChange('unselected'),
+								$author$project$OUI$RadioButton$new))),
+						A3(
+						$author$project$OUI$Material$radiobutton,
+						theme,
+						_List_Nil,
+						A2(
+							$author$project$OUI$RadioButton$withSelected,
+							true,
+							A2(
+								$author$project$OUI$RadioButton$onChange,
+								$author$project$OUI$Showcase$RadioButtons$onChange('selected'),
+								$author$project$OUI$RadioButton$new))),
+						A3(
+						$author$project$OUI$Material$radiobutton,
+						theme,
+						_List_Nil,
+						A2(
+							$author$project$OUI$RadioButton$withSelected,
+							false,
+							$author$project$OUI$RadioButton$disabled($author$project$OUI$RadioButton$new))),
+						A3(
+						$author$project$OUI$Material$radiobutton,
+						theme,
+						_List_Nil,
+						A2(
+							$author$project$OUI$RadioButton$withSelected,
+							true,
+							$author$project$OUI$RadioButton$disabled($author$project$OUI$RadioButton$new))),
+						A3(
+						$author$project$OUI$Material$radiobutton,
+						theme,
+						_List_Nil,
+						A2(
+							$author$project$OUI$RadioButton$withColor,
+							$author$project$OUI$Error,
+							A2(
+								$author$project$OUI$RadioButton$withSelected,
+								false,
+								A2(
+									$author$project$OUI$RadioButton$onChange,
+									$author$project$OUI$Showcase$RadioButtons$onChange('unselected error'),
+									$author$project$OUI$RadioButton$new)))),
+						A3(
+						$author$project$OUI$Material$radiobutton,
+						theme,
+						_List_Nil,
+						A2(
+							$author$project$OUI$RadioButton$withColor,
+							$author$project$OUI$Error,
+							A2(
+								$author$project$OUI$RadioButton$withSelected,
+								true,
+								A2(
+									$author$project$OUI$RadioButton$onChange,
+									$author$project$OUI$Showcase$RadioButtons$onChange('selected error'),
+									$author$project$OUI$RadioButton$new))))
+					]))
+			]));
+};
+var $author$project$OUI$Showcase$RadioButtons$book = A2(
+	$author$project$OUI$Explorer$withStaticChapter,
+	$author$project$OUI$Showcase$RadioButtons$radiobutton,
+	$author$project$OUI$Explorer$book('RadioButton'));
 var $author$project$OUI$Showcase$Switches$SetSwitch = F2(
 	function (a, b) {
 		return {$: 'SetSwitch', a: a, b: b};
@@ -26249,11 +26558,14 @@ var $author$project$OUI$Showcase$addPages = A2(
 						$author$project$OUI$Explorer$addBook($author$project$OUI$Showcase$Checkbox$book),
 						A2(
 							$elm$core$Basics$composeR,
-							$author$project$OUI$Explorer$addBook($author$project$OUI$Showcase$Switches$book),
+							$author$project$OUI$Explorer$addBook($author$project$OUI$Showcase$RadioButtons$book),
 							A2(
 								$elm$core$Basics$composeR,
-								$author$project$OUI$Explorer$addBook($author$project$OUI$Showcase$TextFields$book),
-								$author$project$OUI$Explorer$addBook($author$project$OUI$Showcase$Dividers$book)))))))));
+								$author$project$OUI$Explorer$addBook($author$project$OUI$Showcase$Switches$book),
+								A2(
+									$elm$core$Basics$composeR,
+									$author$project$OUI$Explorer$addBook($author$project$OUI$Showcase$TextFields$book),
+									$author$project$OUI$Explorer$addBook($author$project$OUI$Showcase$Dividers$book))))))))));
 var $elm$svg$Svg$Attributes$enableBackground = _VirtualDom_attribute('enable-background');
 var $icidasset$elm_material_icons$Material$Icons$Internal$b = $elm$svg$Svg$Attributes$enableBackground;
 var $icidasset$elm_material_icons$Material$Icons$Internal$f = $elm$svg$Svg$Attributes$fill;
@@ -26664,6 +26976,7 @@ var $author$project$OUI$Material$Button$defaultTheme = {
 };
 var $author$project$OUI$Material$Checkbox$defaultTheme = {containerHeight: 18, containerShape: 2, containerWidth: 18, iconSize: 18, stateLayerSize: 40};
 var $author$project$OUI$Material$Divider$defaultTheme = {margin: 16, thickness: 1};
+var $author$project$OUI$Material$RadioButton$defaultTheme = {borderWidth: 2, containerHeight: 20, containerShape: 10, containerWidth: 20, contentSize: 10, stateLayerSize: 40};
 var $author$project$OUI$Material$Switch$defaultTheme = {
 	icon: {sizeSelected: 16, sizeUnselected: 16},
 	stateLayer: {size: 40},
@@ -26710,7 +27023,7 @@ var $author$project$OUI$Material$Theme$defaultTypescale = {
 		small: {font: 'Roboto', lineHeight: 20, size: 14, tracking: 0.1, weight: 500}
 	}
 };
-var $author$project$OUI$Material$Theme$defaultTheme = {button: $author$project$OUI$Material$Button$defaultTheme, checkbox: $author$project$OUI$Material$Checkbox$defaultTheme, colorscheme: $author$project$OUI$Material$Color$defaultLightScheme, divider: $author$project$OUI$Material$Divider$defaultTheme, _switch: $author$project$OUI$Material$Switch$defaultTheme, textfield: $author$project$OUI$Material$TextField$defaultTheme, typescale: $author$project$OUI$Material$Theme$defaultTypescale};
+var $author$project$OUI$Material$Theme$defaultTheme = {button: $author$project$OUI$Material$Button$defaultTheme, checkbox: $author$project$OUI$Material$Checkbox$defaultTheme, colorscheme: $author$project$OUI$Material$Color$defaultLightScheme, divider: $author$project$OUI$Material$Divider$defaultTheme, radiobutton: $author$project$OUI$Material$RadioButton$defaultTheme, _switch: $author$project$OUI$Material$Switch$defaultTheme, textfield: $author$project$OUI$Material$TextField$defaultTheme, typescale: $author$project$OUI$Material$Theme$defaultTypescale};
 var $author$project$OUI$Explorer$defaultView = {
 	content: $mdgriffith$elm_ui$Element$text('invalid view'),
 	title: 'Invalid'

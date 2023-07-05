@@ -1,6 +1,6 @@
 module OUI.Material exposing
     ( text, button, checkbox, icon, switch, textField
-    , divider
+    , divider, radiobutton
     )
 
 {-| A elm-ui based renderer API
@@ -19,10 +19,12 @@ import OUI.Material.Button
 import OUI.Material.Checkbox
 import OUI.Material.Divider
 import OUI.Material.Icon
+import OUI.Material.RadioButton
 import OUI.Material.Switch
 import OUI.Material.TextField
 import OUI.Material.Theme exposing (Theme)
 import OUI.Material.Typography
+import OUI.RadioButton
 import OUI.Switch
 import OUI.Text
 import OUI.TextField
@@ -66,6 +68,13 @@ icon { colorscheme } =
 checkbox : Theme -> List (Attribute msg) -> OUI.Checkbox.Checkbox { hasAction : (), withChecked : () } msg -> Element msg
 checkbox theme =
     OUI.Material.Checkbox.render theme.colorscheme theme.checkbox
+
+
+{-| Render a radiobutton
+-}
+radiobutton : Theme -> List (Attribute msg) -> OUI.RadioButton.RadioButton { hasAction : (), withSelected : () } msg -> Element msg
+radiobutton theme =
+    OUI.Material.RadioButton.render theme.colorscheme theme.radiobutton
 
 
 {-| Render a Switch

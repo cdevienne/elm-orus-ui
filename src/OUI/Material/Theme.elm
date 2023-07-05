@@ -10,6 +10,7 @@ import OUI.Material.Button
 import OUI.Material.Checkbox
 import OUI.Material.Color
 import OUI.Material.Divider
+import OUI.Material.RadioButton
 import OUI.Material.Switch
 import OUI.Material.TextField
 import OUI.Material.Typography
@@ -26,6 +27,7 @@ type alias Theme =
     , button : OUI.Material.Button.Theme
     , divider : OUI.Material.Divider.Theme
     , checkbox : OUI.Material.Checkbox.Theme
+    , radiobutton : OUI.Material.RadioButton.Theme
     , switch : OUI.Material.Switch.Theme
     , textfield : OUI.Material.TextField.Theme
     }
@@ -40,6 +42,7 @@ defaultTheme =
     , button = OUI.Material.Button.defaultTheme
     , divider = OUI.Material.Divider.defaultTheme
     , checkbox = OUI.Material.Checkbox.defaultTheme
+    , radiobutton = OUI.Material.RadioButton.defaultTheme
     , switch = OUI.Material.Switch.defaultTheme
     , textfield = OUI.Material.TextField.defaultTheme
     }

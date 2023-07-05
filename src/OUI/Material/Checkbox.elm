@@ -52,6 +52,23 @@ render colorscheme theme attrs checkbox =
             ARIA.roleCheckbox properties.checked
                 |> ARIA.toElementAttributes
 
+        ( focusedAndHoveredColor, pressedColor ) =
+            case ( properties.onChange, properties.checked ) of
+                ( Nothing, _ ) ->
+                    ( colorscheme.onSurface
+                    , colorscheme.onSurface
+                    )
+
+                ( Just _, True ) ->
+                    ( OUI.Material.Color.getColor properties.color colorscheme
+                    , colorscheme.onSurface
+                    )
+
+                ( Just _, False ) ->
+                    ( colorscheme.onSurface
+                    , OUI.Material.Color.getColor properties.color colorscheme
+                    )
+
         ( frontColor, backColor, borderColor ) =
             case ( properties.onChange, properties.color ) of
                 ( Just _, OUI.Error ) ->
@@ -76,23 +93,24 @@ render colorscheme theme attrs checkbox =
     in
     Input.button
         (aria
+            ++ attrs
             ++ [ Element.width <| Element.px theme.stateLayerSize
                , Element.height <| Element.px theme.stateLayerSize
                , Border.rounded <| theme.stateLayerSize // 2
                , Element.focused
-                    [ colorscheme.onSurface
+                    [ focusedAndHoveredColor
                         |> OUI.Material.Color.setAlpha OUI.Material.Color.focusStateLayerOpacity
                         |> OUI.Material.Color.toElementColor
                         |> Background.color
                     ]
                , Element.mouseDown
-                    [ colorscheme.onSurface
+                    [ pressedColor
                         |> OUI.Material.Color.setAlpha OUI.Material.Color.pressStateLayerOpacity
                         |> OUI.Material.Color.toElementColor
                         |> Background.color
                     ]
                , Element.mouseOver
-                    [ colorscheme.onSurface
+                    [ focusedAndHoveredColor
                         |> OUI.Material.Color.setAlpha OUI.Material.Color.hoverStateLayerOpacity
                         |> OUI.Material.Color.toElementColor
                         |> Background.color
