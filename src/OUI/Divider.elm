@@ -36,9 +36,7 @@ type Type
 {-| underlying properties of the divider
 -}
 type alias Props =
-    { color : Maybe Color
-    , type_ : Type
-    }
+    { type_ : Type }
 
 
 {-| A divider
@@ -49,22 +47,13 @@ type Divider
 
 {-| Create a divider with the given thickness
 
-By default, the divider has a thickness of 1dp and it's color is TODO idk
+By default, the divider has a thickness of 1dp and it's color is outline variant
 
 -}
 new : Divider
 new =
     Divider
-        { color = Nothing
-        , type_ = FullWidth
-        }
-
-
-{-| Set the divider color
--}
-color : Color -> Divider -> Divider
-color value (Divider props) =
-    Divider { props | color = Just value }
+        { type_ = FullWidth }
 
 
 {-| Set the divider type
@@ -91,9 +80,6 @@ insetDivider =
 {-| -}
 properties :
     Divider
-    ->
-        { color : Maybe Color
-        , type_ : Type
-        }
+    -> { type_ : Type }
 properties (Divider props) =
     props

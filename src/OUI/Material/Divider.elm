@@ -31,14 +31,9 @@ render colorscheme theme attrs divider =
         properties =
             Divider.properties divider
 
-        color =
-            OUI.Material.Color.getColor
-                (properties.color |> Maybe.withDefault OUI.Primary)
-                colorscheme
-
         all_attrs =
             [ Element.height <| Element.px theme.thickness
-            , Element.Background.color <| OUI.Material.Color.toElementColor color
+            , Element.Background.color <| OUI.Material.Color.toElementColor colorscheme.outlineVariant
             , Element.centerX
             ]
                 ++ attrs
